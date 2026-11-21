@@ -1,0 +1,12 @@
+streamlit>=1.46
+streamlit-webrtc>=0.60
+av
+opencv-python-headless
+torch
+torchvision
+scikit-learn
+scikit-image
+numpy
+pandas
+pillow
+altair
