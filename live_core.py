@@ -118,7 +118,13 @@ class SmallCNN(nn.Module):
 def load_resnet18_backbone() -> nn.Module:
     """ImageNet ResNet18 with the classifier removed (outputs 512 numbers per image)."""
     import torchvision
-    net = torchvision.models.resnet18(weights=torchvision.models.ResNet18_Weights.DEFAULT)
+    from pathlib import Path
+    local = Path(__file__).parent / "resnet18-f37072fd.pth"     # optional manual download
+    if local.exists():
+        net = torchvision.models.resnet18()
+        net.load_state_dict(torch.load(local, map_location="cpu"))
+    else:
+        net = torchvision.models.resnet18(weights=torchvision.models.ResNet18_Weights.DEFAULT)
     net.fc = nn.Identity()
     return net.eval()
 

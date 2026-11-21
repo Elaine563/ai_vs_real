@@ -17,7 +17,6 @@ from pathlib import Path
 
 import altair as alt
 import av
-import cv2
 import numpy as np
 import pandas as pd
 import streamlit as st
@@ -57,23 +56,20 @@ class FrameCollector:
         self._last = 0.0
 
     def __call__(self, frame: av.VideoFrame) -> av.VideoFrame:
-        img = frame.to_ndarray(format="bgr24")
+        # Kept as light as possible: the frame is passed straight back to the browser untouched,
+        # and only converted to an image (5 times a second) while recording.
+        if not self.recording:
+            return frame
         now = time.time()
-        with self.lock:
-            if self.recording and len(self.frames) < self.target and now - self._last >= 1 / FPS:
-                self.frames.append(core.square_resize(img[:, :, ::-1]))
-                self._last = now
-            if len(self.frames) >= self.target:
-                self.recording = False
-            rec, n, tgt = self.recording, len(self.frames), self.target
-        h, w = img.shape[:2]
-        if rec:
-            cv2.rectangle(img, (0, 0), (w - 1, h - 1), (58, 103, 176), 8)
-            cv2.circle(img, (w - 30, 30), 12, (40, 40, 220), -1)
-        cv2.rectangle(img, (0, h - 44), (230, h), (32, 34, 43), -1)
-        cv2.putText(img, f"{'REC ' if rec else ''}{n} / {tgt}", (14, h - 14), cv2.FONT_HERSHEY_SIMPLEX, 0.85,
-                    (255, 255, 255), 2, cv2.LINE_AA)
-        return av.VideoFrame.from_ndarray(img, format="bgr24")
+        if now - self._last >= 1 / FPS:
+            img = core.square_resize(frame.to_ndarray(format="rgb24"))
+            with self.lock:
+                if self.recording and len(self.frames) < self.target:
+                    self.frames.append(img)
+                    self._last = now
+                if len(self.frames) >= self.target:
+                    self.recording = False
+        return frame
 
     def snapshot(self):
         with self.lock:
@@ -213,7 +209,9 @@ def page_record():
     left, right = st.columns([3, 2])
     with left:
         webrtc_streamer(key="cam", mode=WebRtcMode.SENDRECV, video_frame_callback=col,
-                        media_stream_constraints={"video": True, "audio": False},
+                        media_stream_constraints={"video": {"width": {"ideal": 640}, "height": {"ideal": 480},
+                                                            "frameRate": {"ideal": 15, "max": 20}},
+                                                  "audio": False},
                         rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
                         async_processing=True)
     with right:
@@ -261,13 +259,13 @@ def page_record():
 def live_progress(need: int):
     frames, rec = ss.collector.snapshot()
 
-    @st.fragment(run_every=0.4 if rec else None)
+    @st.fragment(run_every=1.0 if rec else None)
     def _p():
         f, r = ss.collector.snapshot()
         n = len(f) + len(ss.extra_real)
         st.progress(min(n / max(need, 1), 1.0), text=f"{'🔴 Recording… ' if r else ''}{n} / {need} real photos")
         if f:
-            st.image(f[-12:][::-1], width=64)
+            st.image(f[-6:][::-1], width=56)
         if not r and rec:
             st.rerun()          # recording just finished: refresh the buttons
 
@@ -320,9 +318,14 @@ def page_train():
                     for fix in (False, True):
                         st.write(f"{core.MODEL_INFO[key][0]} · {'class weights' if fix else 'no handling'}")
                         trained.append(core.train_classical(key, Ftr, ytr, fix, ext))
+            bb = None
             if "resnet18" in models:
+                try:
+                    bb = resnet_backbone()
+                except Exception:
+                    st.write("ResNet18 skipped: weights could not be downloaded.")
+            if bb is not None:
                 st.write("ResNet18: turning images into 512 ImageNet features…")
-                bb = resnet_backbone()
                 Etr = core.resnet_embed(bb, Xtr)
                 for fix in (False, True):
                     st.write(f"ResNet18 · {'weighted loss' if fix else 'no handling'}")
@@ -336,13 +339,16 @@ def page_train():
             status.update(label=f"Done in {time.time() - t_all:.0f} s", state="complete", expanded=False)
         ss.run = {"trained": {(t.key, t.fix): t for t in trained}, "scores": scores, "yte": yte,
                   "n_tr": (int((ytr == 0).sum()), int((ytr == 1).sum())), "ratio_used": ratio,
-                  "Xte": Xte}
+                  "Xte": Xte, "resnet_missing": "resnet18" in models and bb is None}
 
     if ss.run:
         show_results(ss.run)
 
 
 def show_results(run):
+    if run.get("resnet_missing"):
+        st.warning("ResNet18 was skipped because its ImageNet weights could not be downloaded. Connect to the "
+                   "internet and press Train again, or put `resnet18-f37072fd.pth` in the app folder (see README).")
     yte, (nr, na) = run["yte"], run["n_tr"]
     r_used = nr / max(na, 1)
     st.markdown(f"Trained on **{nr} real : {na} AI** (≈ {r_used:.0f}:1). Tested on **{(yte == 0).sum()} new real "
