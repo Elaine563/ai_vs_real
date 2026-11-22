@@ -1,0 +1,27 @@
+{
+  "model": "ResNet18 (frozen ImageNet backbone) + class-weighted output layer",
+  "train_ratio": "10:1",
+  "n_train": [
+    4250,
+    425
+  ],
+  "threshold": 0.8153490424156189,
+  "test_recall": 0.385,
+  "test_precision": 0.4010416666666667,
+  "test_fpr": 0.0575,
+  "test_macro_f1": 0.6667379526660964,
+  "test_mcc": 0.3335867800996282,
+  "test_accuracy": 0.8918181818181818,
+  "test_pr_auc": 0.351303424478104,
+  "confusion_matrix": [
+    [
+      1885,
+      115
+    ],
+    [
+      123,
+      77
+    ]
+  ],
+  "minutes": 0.9
+}

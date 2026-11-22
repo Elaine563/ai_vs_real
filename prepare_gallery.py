@@ -1,4 +1,4 @@
-"""Fill ai_gallery/ with AI-generated images from the subset you exported for the assignment.
+"""Fill ai_gallery/ with AI-generated images for chapter 4 (Train your own detector).
 
 Usage:
     python prepare_gallery.py path/to/ipcv_subset.zip          # the zip from Step1 (Kaggle)

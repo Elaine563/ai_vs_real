@@ -1,0 +1,338 @@
+[
+ {
+  "file": "feed_000.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.2683122456073761
+ },
+ {
+  "file": "feed_001.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.11837969720363617
+ },
+ {
+  "file": "feed_002.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.3150913119316101
+ },
+ {
+  "file": "feed_003.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.17041976749897003
+ },
+ {
+  "file": "feed_004.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.005858324933797121
+ },
+ {
+  "file": "feed_005.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.3786521255970001
+ },
+ {
+  "file": "feed_006.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.4468921720981598
+ },
+ {
+  "file": "feed_007.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.031446006149053574
+ },
+ {
+  "file": "feed_008.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.070242740213871
+ },
+ {
+  "file": "feed_009.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.9978688955307007
+ },
+ {
+  "file": "feed_010.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.3164992034435272
+ },
+ {
+  "file": "feed_011.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.3583414852619171
+ },
+ {
+  "file": "feed_012.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.005904113408178091
+ },
+ {
+  "file": "feed_013.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.002056592144072056
+ },
+ {
+  "file": "feed_014.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.0678754672408104
+ },
+ {
+  "file": "feed_015.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.48274171352386475
+ },
+ {
+  "file": "feed_016.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.3012321889400482
+ },
+ {
+  "file": "feed_017.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.0015463230665773153
+ },
+ {
+  "file": "feed_018.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.688858687877655
+ },
+ {
+  "file": "feed_019.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.6902174949645996
+ },
+ {
+  "file": "feed_020.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.14240126311779022
+ },
+ {
+  "file": "feed_021.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.9735959768295288
+ },
+ {
+  "file": "feed_022.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.05763039365410805
+ },
+ {
+  "file": "feed_023.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.022940360009670258
+ },
+ {
+  "file": "feed_024.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.10759057849645615
+ },
+ {
+  "file": "feed_025.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.25282448530197144
+ },
+ {
+  "file": "feed_026.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.0855739563703537
+ },
+ {
+  "file": "feed_027.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.5579134821891785
+ },
+ {
+  "file": "feed_028.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.01837487518787384
+ },
+ {
+  "file": "feed_029.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.6868758201599121
+ },
+ {
+  "file": "feed_030.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.6125989556312561
+ },
+ {
+  "file": "feed_031.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.07946693152189255
+ },
+ {
+  "file": "feed_032.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.0001729116920614615
+ },
+ {
+  "file": "feed_033.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.5398631691932678
+ },
+ {
+  "file": "feed_034.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.26463279128074646
+ },
+ {
+  "file": "feed_035.png",
+  "role": "feed",
+  "label": 0,
+  "score": 0.013001630082726479
+ },
+ {
+  "file": "feed_036.png",
+  "role": "feed",
+  "label": 1,
+  "score": 0.22852492332458496
+ },
+ {
+  "file": "feed_037.png",
+  "role": "feed",
+  "label": 1,
+  "score": 0.9871047735214233
+ },
+ {
+  "file": "feed_038.png",
+  "role": "feed",
+  "label": 1,
+  "score": 0.3017573952674866
+ },
+ {
+  "file": "feed_039.png",
+  "role": "feed",
+  "label": 1,
+  "score": 0.7489897608757019
+ },
+ {
+  "file": "feed_040.png",
+  "role": "feed",
+  "label": 1,
+  "score": 0.15443572402000427
+ },
+ {
+  "file": "feed_041.png",
+  "role": "feed",
+  "label": 1,
+  "score": 0.5664914846420288
+ },
+ {
+  "file": "feed_042.png",
+  "role": "feed",
+  "label": 1,
+  "score": 0.8898741006851196
+ },
+ {
+  "file": "feed_043.png",
+  "role": "feed",
+  "label": 1,
+  "score": 0.5137982964515686
+ },
+ {
+  "file": "feed_044.png",
+  "role": "feed",
+  "label": 1,
+  "score": 0.21712107956409454
+ },
+ {
+  "file": "feed_045.png",
+  "role": "feed",
+  "label": 1,
+  "score": 0.03475292772054672
+ },
+ {
+  "file": "feed_046.png",
+  "role": "feed",
+  "label": 1,
+  "score": 0.7727084755897522
+ },
+ {
+  "file": "feed_047.png",
+  "role": "feed",
+  "label": 1,
+  "score": 0.8238811492919922
+ },
+ {
+  "file": "false_flag_048.png",
+  "role": "false_flag",
+  "label": 0,
+  "score": 0.9998051524162292
+ },
+ {
+  "file": "false_flag_049.png",
+  "role": "false_flag",
+  "label": 0,
+  "score": 0.9992142915725708
+ },
+ {
+  "file": "false_flag_050.png",
+  "role": "false_flag",
+  "label": 0,
+  "score": 0.9986751675605774
+ },
+ {
+  "file": "false_flag_051.png",
+  "role": "false_flag",
+  "label": 0,
+  "score": 0.9978688955307007
+ },
+ {
+  "file": "missed_052.png",
+  "role": "missed",
+  "label": 1,
+  "score": 0.00538625568151474
+ },
+ {
+  "file": "missed_053.png",
+  "role": "missed",
+  "label": 1,
+  "score": 0.005533650517463684
+ },
+ {
+  "file": "missed_054.png",
+  "role": "missed",
+  "label": 1,
+  "score": 0.0059451512061059475
+ },
+ {
+  "file": "missed_055.png",
+  "role": "missed",
+  "label": 1,
+  "score": 0.011512125842273235
+ }
+]

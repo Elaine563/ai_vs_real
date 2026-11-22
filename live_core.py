@@ -245,3 +245,32 @@ def evaluate(y_true: np.ndarray, scores: np.ndarray, threshold: float = 0.5) -> 
         "mcc": matthews_corrcoef(y_true, pred) if len(set(pred)) > 1 else 0.0,
         "cm": np.array([[tn, fp], [fn, tp]]),
     }
+
+
+# ----------------------------------------------------------------------------- Grad-CAM for the screening page
+def gradcam(backbone: nn.Module, head: nn.Module, img: np.ndarray) -> np.ndarray:
+    """Heatmap (HxW in [0, 1]) of where ResNet18 looked when pushing the score towards 'AI'."""
+    for m in backbone.modules():                      # in-place ReLU breaks gradient capture
+        if isinstance(m, nn.ReLU):
+            m.inplace = False
+    store = {}
+
+    def keep(module, inp, out):
+        store["act"] = out
+        out.register_hook(lambda g: store.__setitem__("grad", g))
+
+    h = backbone.layer4[-1].register_forward_hook(keep)
+    x = to_tensor(img[None]).requires_grad_(True)
+    head(backbone(x))[:, 1].sum().backward()
+    h.remove()
+    w = store["grad"].mean(dim=(2, 3), keepdim=True)
+    cam = F.relu((w * store["act"]).sum(1, keepdim=True))
+    cam = F.interpolate(cam, size=img.shape[:2], mode="bilinear", align_corners=False)[0, 0]
+    return (cam / (cam.max() + 1e-8)).detach().numpy()
+
+
+def overlay(img: np.ndarray, cam: np.ndarray, alpha: float = 0.45) -> np.ndarray:
+    """Blend a heatmap (warm = high attention) over the image."""
+    import matplotlib.cm as cm
+    heat = (cm.inferno(cam)[..., :3] * 255).astype(np.float32)
+    return np.clip((1 - alpha) * img + alpha * heat, 0, 255).astype(np.uint8)
